@@ -51,6 +51,7 @@ export function initHero(root = document) {
             start: "top top",
             end: "bottom top",
             scrub: true,
+            invalidateOnRefresh: true,
           },
         }
       );
@@ -69,6 +70,7 @@ export function initHero(root = document) {
           start: "top top",
           end: "bottom top",
           scrub: true,
+          invalidateOnRefresh: true,
         },
       });
       if (!photo.complete) {
@@ -83,6 +85,7 @@ export function initHero(root = document) {
           start: "top top",
           end: "bottom top",
           scrub: true,
+          invalidateOnRefresh: true,
         },
       });
     }

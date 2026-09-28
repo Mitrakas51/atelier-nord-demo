@@ -28,13 +28,16 @@ Puis ouvre l’URL affichée (les modules ES nécessitent un serveur local, pas 
 
 ## Effets ScrollTrigger
 
-1. Entrée hero + scrub léger sur le fond  
-2. Fade-up + stagger des cartes « Approche »  
-3. Scrub du titre « Précision »  
-4. Pin court du bloc visuel (tablette / desktop)  
-5. Barre de progression du process (desktop)  
+1. Smooth scroll desktop (**Lenis**, sync ticker GSAP)  
+2. Ribbons SVG fixed (draw scrubbé sur toute la page)  
+3. Entrée hero + parallax photo  
+4. Fade-up + stagger des cartes « Approche »  
+5. Showcase : clip-path image scrubbé  
+6. Pin horizontal « Réalisations » (desktop ≥992)  
+7. Pin scène « Précision » + panneaux (desktop ≥992)  
+8. Barre de progression du process (desktop)  
 
-Mobile : pin / scrub lourds réduits (`matchMedia`).  
+Mobile : pas de pin, trails SVG désactivés (`matchMedia`).  
 Respect de `prefers-reduced-motion`.
 
 ## Structure

@@ -35,6 +35,7 @@ export function initProcess(root = document) {
               start: "top 65%",
               end: "bottom 50%",
               scrub: true,
+              invalidateOnRefresh: true,
               onUpdate: (self) => {
                 const active = Math.min(
                   steps.length - 1,

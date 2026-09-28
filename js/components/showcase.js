@@ -30,6 +30,7 @@ export function initShowcase(root = document) {
         start: "top 72%",
         end: "center 40%",
         scrub: true,
+        invalidateOnRefresh: true,
       },
     });
 
