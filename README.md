@@ -57,3 +57,7 @@ components/*/       # snippets HTML pour réemploi
 ## Auteur
 
 Sébastien Louis — [GitHub](https://github.com/sebachien)
+
+---
+
+> Repo **public** (Vercel / recruteur). Le workspace de développement agent est séparé (`demo-gsap-scroll`).
