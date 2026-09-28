@@ -62,3 +62,6 @@ Sébastien Louis — [GitHub](https://github.com/sebachien)
 ---
 
 > Repo **public** (Vercel / recruteur). Le workspace de développement agent est séparé (`demo-gsap-scroll`).
+
+<!-- deploy-check 2026-09-28 15:30 -->
+
