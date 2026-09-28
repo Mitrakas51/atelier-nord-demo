@@ -1,7 +1,10 @@
+/**
+ * Showcase — timeline scrub : clip-path image + copy.
+ * Peer: GSAP + ScrollTrigger. Cleanup via ctx.revert().
+ */
 import { ensureGsapPlugins, prefersReducedMotion } from "./motion-utils.js";
 
 /**
- * Showcase — reveal image (clip-path scrub) + copie fade-in.
  * @param {ParentNode} [root=document]
  * @returns {() => void}
  */
@@ -13,38 +16,34 @@ export function initShowcase(root = document) {
 
   const ctx = gsap.context(() => {
     const reveal = section.querySelector(".c-showcase__reveal, .showcase-reveal");
-    const copy = section.querySelector(".c-showcase__copy, .showcase-copy");
+    const img = reveal?.querySelector("img");
+    const copyKids = gsap.utils.toArray(
+      section.querySelectorAll(".c-showcase__copy > *, .showcase-copy > *")
+    );
+
+    if (!reveal && copyKids.length === 0) return;
+
+    const tl = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: {
+        trigger: section,
+        start: "top 72%",
+        end: "center 40%",
+        scrub: true,
+      },
+    });
 
     if (reveal) {
-      gsap.fromTo(
-        reveal,
-        { clipPath: "inset(12% 14% 12% 14% round 18px)" },
-        {
-          clipPath: "inset(0% 0% 0% 0% round 18px)",
-          ease: "none",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 70%",
-            end: "center 45%",
-            scrub: 0.7,
-          },
-        }
-      );
+      gsap.set(reveal, { clipPath: "inset(12% 14% 12% 14% round 18px)" });
+      tl.to(reveal, { clipPath: "inset(0% 0% 0% 0% round 18px)" }, 0);
     }
-
-    if (copy) {
-      gsap.from(copy.children, {
-        y: 28,
-        opacity: 0,
-        duration: 0.7,
-        stagger: 0.1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 72%",
-          toggleActions: "play none none reverse",
-        },
-      });
+    if (img) {
+      gsap.set(img, { scale: 1.06 });
+      tl.to(img, { scale: 1 }, 0);
+    }
+    if (copyKids.length) {
+      gsap.set(copyKids, { y: 28, opacity: 0 });
+      tl.to(copyKids, { y: 0, opacity: 1, stagger: 0.08 }, 0.05);
     }
   }, root);
 

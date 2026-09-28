@@ -1,3 +1,8 @@
 # Process timeline
 
-`initProcess(root?)` — barre de progression + reveal (desktop ≥992px).
+`initProcess(root?)` — barre `scaleX` scrub + reveal steps.
+
+- **≥992px** : progress sur `.process-track` + from steps.
+- **&lt;992px** : reveal steps only (pas de pin).
+
+Peer : GSAP + ScrollTrigger. Reduced-motion → skip.

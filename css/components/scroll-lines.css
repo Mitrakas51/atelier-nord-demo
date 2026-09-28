@@ -1,0 +1,90 @@
+/* Scroll lines — spines FIXÉS viewport (ribbons soft + trails) */
+
+/*
+ * Conteneur fixed 100vh : courbes toujours à l’écran pendant le scroll.
+ * Draw scrubbé sur toute la hauteur de page (fin en bas).
+ */
+.c-scroll-lines__spine-wrap {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.c-scroll-lines__spine {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.c-scroll-lines__spine-path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Trails flous — sillage discret derrière le trait */
+.c-scroll-lines__spine-path--trail {
+  filter: url(#spine-trail-blur);
+  opacity: 0.28;
+}
+
+.c-scroll-lines__spine-path--trail-a {
+  stroke: rgba(15, 118, 110, 0.22);
+  stroke-width: 9;
+}
+
+.c-scroll-lines__spine-path--trail-b {
+  stroke: rgba(16, 24, 32, 0.1);
+  stroke-width: 7;
+}
+
+.c-scroll-lines__spine-path--trail-c {
+  stroke: rgba(180, 150, 100, 0.22);
+  stroke-width: 8;
+}
+
+/* Traits nets — discrets, fond de scène */
+.c-scroll-lines__spine-path--main {
+  stroke: rgba(15, 118, 110, 0.28);
+  stroke-width: 1.6;
+}
+
+.c-scroll-lines__spine-path--alt {
+  stroke: rgba(16, 24, 32, 0.14);
+  stroke-width: 1.35;
+}
+
+.c-scroll-lines__spine-path--soft {
+  stroke: rgba(168, 138, 90, 0.32);
+  stroke-width: 1.45;
+}
+
+@media (max-width: 991.98px) {
+  /* Perf mobile : pas de blur SVG (filtre coûteux) */
+  .c-scroll-lines__spine-path--trail {
+    display: none;
+  }
+
+  .c-scroll-lines__spine-path--main {
+    stroke-width: 1.35;
+    opacity: 0.75;
+  }
+
+  .c-scroll-lines__spine-path--alt,
+  .c-scroll-lines__spine-path--soft {
+    stroke-width: 1.15;
+    opacity: 0.65;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .c-scroll-lines__spine-wrap {
+    display: none;
+  }
+}

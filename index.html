@@ -29,7 +29,14 @@
       integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css"
+      integrity="sha384-gvLq/iOMNnPchdosgVym5huSVkKipHCQaqSw2Eg0V52Mzmlf169ZOsXcNc2cNu8x"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components/scroll-lines.css" />
     <link rel="stylesheet" href="css/components/approach.css" />
     <link rel="stylesheet" href="css/components/showcase.css" />
     <link rel="stylesheet" href="css/components/work.css" />
@@ -37,6 +44,61 @@
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+    <!--
+      Spines FIXÉS viewport : ribbons courbes + trails (géométrie JS).
+      Draw scrubbé sur toute la hauteur de page.
+    -->
+    <div class="c-scroll-lines__spine-wrap" aria-hidden="true">
+      <svg class="c-scroll-lines__spine" viewBox="0 0 1000 1000" fill="none">
+        <defs>
+          <filter id="spine-trail-blur" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" />
+          </filter>
+        </defs>
+        <!-- Trails (sous les traits nets) -->
+        <path
+          class="c-scroll-lines__spine-path c-scroll-lines__spine-path--trail c-scroll-lines__spine-path--trail-a"
+          data-draw-spine
+          data-spine="a"
+          data-spine-trail
+          d="M280 0 C280 250 720 250 720 500 C720 750 280 750 280 1000"
+        />
+        <path
+          class="c-scroll-lines__spine-path c-scroll-lines__spine-path--trail c-scroll-lines__spine-path--trail-b"
+          data-draw-spine
+          data-spine="b"
+          data-spine-trail
+          d="M180 0 C180 250 420 250 420 500 C420 750 180 750 180 1000"
+        />
+        <path
+          class="c-scroll-lines__spine-path c-scroll-lines__spine-path--trail c-scroll-lines__spine-path--trail-c"
+          data-draw-spine
+          data-spine="c"
+          data-spine-trail
+          d="M720 0 C720 250 920 250 920 500 C920 750 720 750 720 1000"
+        />
+        <!-- Traits nets -->
+        <path
+          class="c-scroll-lines__spine-path c-scroll-lines__spine-path--main"
+          data-draw-spine
+          data-spine="a"
+          d="M280 0 C280 250 720 250 720 500 C720 750 280 750 280 1000"
+        />
+        <path
+          class="c-scroll-lines__spine-path c-scroll-lines__spine-path--alt"
+          data-draw-spine
+          data-spine="b"
+          d="M180 0 C180 250 420 250 420 500 C420 750 180 750 180 1000"
+        />
+        <path
+          class="c-scroll-lines__spine-path c-scroll-lines__spine-path--soft"
+          data-draw-spine
+          data-spine="c"
+          d="M720 0 C720 250 920 250 920 500 C920 750 720 750 720 1000"
+        />
+      </svg>
+    </div>
 
     <header class="site-header">
       <nav class="navbar navbar-expand-lg" aria-label="Navigation principale">
@@ -81,11 +143,12 @@
             fetchpriority="high"
           />
         </div>
+        <p class="hero-orbit" aria-hidden="true">Intégration · Motion · Responsive</p>
         <div class="container hero-content" id="contenu">
-          <p class="hero-brand reveal-load">Atelier Nord</p>
-          <h1 class="hero-title reveal-load">
-            Des sites nets pour<br />
-            les métiers du tertiaire.
+          <p class="hero-brand hero-brand--stroke reveal-load">Atelier Nord</p>
+          <h1 class="hero-title">
+            <span class="line"><span>Des sites nets pour</span></span>
+            <span class="line"><span>les métiers du tertiaire.</span></span>
           </h1>
           <p class="hero-lead reveal-load">
             Nous intégrons vos interfaces web avec exigence : responsive,
@@ -98,12 +161,21 @@
         </div>
       </section>
 
+      <div class="marquee-strip c-marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>HTML5</span><span><em>CSS3</em></span><span>Bootstrap</span><span><em>GSAP</em></span>
+          <span>ScrollTrigger</span><span><em>Responsive</em></span><span>Accessibilité</span>
+          <span>HTML5</span><span><em>CSS3</em></span><span>Bootstrap</span><span><em>GSAP</em></span>
+          <span>ScrollTrigger</span><span><em>Responsive</em></span><span>Accessibilité</span>
+        </div>
+      </div>
+
       <!-- Approche -->
       <section id="approche" class="section section-approche c-approach">
         <div class="container">
           <div class="section-heading">
             <p class="eyebrow">Approche</p>
-            <h2>Ce qui compte sur chaque livraison</h2>
+            <h2 class="heading-stroke">Ce qui compte sur chaque livraison</h2>
             <p class="section-lead">
               Fidélité au design, code lisible, animations au service du message —
               pas d’effets gadget.
@@ -112,32 +184,38 @@
           <div class="row g-4">
             <div class="col-md-4">
               <article class="approach-item reveal-card c-approach__card">
-                <span class="approach-index">01</span>
-                <h3>Rendu soigné</h3>
-                <p>
-                  HTML5 sémantique, CSS maîtrisé, contrastes et états hover
-                  travaillés jusqu’au détail.
-                </p>
+                <div class="approach-item__inner">
+                  <span class="approach-index">01</span>
+                  <h3>Rendu soigné</h3>
+                  <p>
+                    HTML5 sémantique, CSS maîtrisé, contrastes et états hover
+                    travaillés jusqu’au détail.
+                  </p>
+                </div>
               </article>
             </div>
             <div class="col-md-4">
               <article class="approach-item reveal-card c-approach__card">
-                <span class="approach-index">02</span>
-                <h3>Responsive réel</h3>
-                <p>
-                  Mobile-first avec Bootstrap 5 : grilles stables, lecture
-                  confortable, pas de « cassé » au resize.
-                </p>
+                <div class="approach-item__inner">
+                  <span class="approach-index">02</span>
+                  <h3>Responsive réel</h3>
+                  <p>
+                    Mobile-first avec Bootstrap 5 : grilles stables, lecture
+                    confortable, pas de « cassé » au resize.
+                  </p>
+                </div>
               </article>
             </div>
             <div class="col-md-4">
               <article class="approach-item reveal-card c-approach__card">
-                <span class="approach-index">03</span>
-                <h3>Motion utile</h3>
-                <p>
-                  GSAP + ScrollTrigger pour rythmer le scroll et guider le
-                  regard — avec respect du reduced-motion.
-                </p>
+                <div class="approach-item__inner">
+                  <span class="approach-index">03</span>
+                  <h3>Motion utile</h3>
+                  <p>
+                    GSAP + ScrollTrigger pour rythmer le scroll et guider le
+                    regard — avec respect du reduced-motion.
+                  </p>
+                </div>
               </article>
             </div>
           </div>
@@ -192,60 +270,68 @@
               B2B : clarté, confiance, sobriété.
             </p>
           </div>
-          <div class="row g-4">
-            <div class="col-md-4">
-              <article class="work-card reveal-work">
-                <div class="work-media">
-                  <img
-                    src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
-                    alt="Bureau avec documents et ordinateur portable"
-                    width="800"
-                    height="600"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="work-body">
-                  <p class="work-tag">Assurance</p>
-                  <h3>Horizon Mutuelle</h3>
-                  <p>Parcours clair pour comparer offres et prendre rendez-vous.</p>
-                </div>
-              </article>
-            </div>
-            <div class="col-md-4">
-              <article class="work-card reveal-work">
-                <div class="work-media">
-                  <img
-                    src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80"
-                    alt="Façade d’immeuble résidentiel contemporain"
-                    width="800"
-                    height="600"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="work-body">
-                  <p class="work-tag">Immobilier</p>
-                  <h3>Ateliers Fonciers</h3>
-                  <p>Vitrine de programmes et filtres d’annonces lisibles.</p>
-                </div>
-              </article>
-            </div>
-            <div class="col-md-4">
-              <article class="work-card reveal-work">
-                <div class="work-media">
-                  <img
-                    src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80"
-                    alt="Poignée de main en réunion professionnelle"
-                    width="800"
-                    height="600"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="work-body">
-                  <p class="work-tag">Conseil</p>
-                  <h3>Cabinet Ligne Droite</h3>
-                  <p>Site corporate sobre avec prise de contact rapide.</p>
-                </div>
-              </article>
+          <div class="work-track">
+            <div class="work-rail">
+              <div class="work-card-wrap">
+                <article class="work-card reveal-work">
+                  <div class="work-card__shell">
+                    <div class="work-media">
+                      <img
+                        src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
+                        alt="Bureau avec documents et ordinateur portable"
+                        width="800"
+                        height="600"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="work-body">
+                      <p class="work-tag">Assurance</p>
+                      <h3>Horizon Mutuelle</h3>
+                      <p>Parcours clair pour comparer offres et prendre rendez-vous.</p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="work-card-wrap">
+                <article class="work-card reveal-work">
+                  <div class="work-card__shell">
+                    <div class="work-media">
+                      <img
+                        src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80"
+                        alt="Façade d’immeuble résidentiel contemporain"
+                        width="800"
+                        height="600"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="work-body">
+                      <p class="work-tag">Immobilier</p>
+                      <h3>Ateliers Fonciers</h3>
+                      <p>Vitrine de programmes et filtres d’annonces lisibles.</p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div class="work-card-wrap">
+                <article class="work-card reveal-work">
+                  <div class="work-card__shell">
+                    <div class="work-media">
+                      <img
+                        src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80"
+                        alt="Poignée de main en réunion professionnelle"
+                        width="800"
+                        height="600"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div class="work-body">
+                      <p class="work-tag">Conseil</p>
+                      <h3>Cabinet Ligne Droite</h3>
+                      <p>Site corporate sobre avec prise de contact rapide.</p>
+                    </div>
+                  </div>
+                </article>
+              </div>
             </div>
           </div>
         </div>
@@ -409,7 +495,7 @@
       <section class="section section-proof" aria-label="Stack technique">
         <div class="container">
           <div class="proof-banner">
-            <p class="proof-title">Démo d’intégration Front-end</p>
+            <p class="proof-title heading-stroke">Démo d’intégration Front-end</p>
             <p class="proof-stack">HTML5 · CSS3 · Bootstrap 5 · JavaScript · GSAP ScrollTrigger</p>
             <p class="proof-links mb-0">
               <a href="https://atelier-nord-demo-green.vercel.app" target="_blank" rel="noopener noreferrer">Live</a>
@@ -424,7 +510,7 @@
       <section id="contact" class="section section-contact c-contact">
         <div class="container">
           <div class="contact-panel c-contact__panel reveal-contact">
-            <div class="row g-4 align-items-end">
+            <div class="row g-4 align-items-start">
               <div class="col-lg-5">
                 <p class="eyebrow">Contact</p>
                 <h2>Un projet d’intégration ?</h2>
@@ -484,6 +570,11 @@
     <script
       src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
       integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"
+      integrity="sha384-jqpi9VmOdhyLoLURgjCn7EpnG9BbnHW57ibIZoeaIU+erWDH3k8fQQg0xH2ySjnw"
       crossorigin="anonymous"
     ></script>
     <script type="module" src="js/main.js"></script>

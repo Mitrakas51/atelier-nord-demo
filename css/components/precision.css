@@ -32,14 +32,15 @@
 
 .precision-glow {
   position: absolute;
-  width: 220px;
-  height: 220px;
-  right: -40px;
-  bottom: -40px;
+  width: 160px;
+  height: 160px;
+  right: 12%;
+  bottom: 14%;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(20, 184, 166, 0.55), transparent 70%);
   filter: blur(8px);
   will-change: transform;
+  pointer-events: none;
 }
 
 .precision-label,
@@ -172,6 +173,17 @@
     display: block;
   }
 
+  .precision-panels {
+    min-height: 0;
+  }
+
+  .precision-panel {
+    position: relative !important;
+    inset: auto !important;
+    width: auto !important;
+    pointer-events: auto !important;
+  }
+
   .precision-panel + .precision-panel {
     margin-top: 2rem;
     padding-top: 1.5rem;
@@ -180,5 +192,19 @@
 
   .precision-steps {
     display: none;
+  }
+
+  .precision-visual {
+    min-height: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .precision-frame {
+    min-height: 0;
+    padding: 1.75rem 1.5rem;
+  }
+
+  .precision-metric {
+    font-size: clamp(2.75rem, 14vw, 4rem);
   }
 }

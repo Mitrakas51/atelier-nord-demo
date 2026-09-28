@@ -1,6 +1,6 @@
 # Showcase
 
-`initShowcase(root?)` — reveal image (clip-path scrub) + copie fade-in.
+`initShowcase(root?)` — une timeline scrub : clip-path + scale image + copy fade.
 
-Peer dep : GSAP 3 + ScrollTrigger. Sélecteurs : `.c-showcase__reveal` / `.showcase-reveal`, `.c-showcase__copy`.
+Peer dep : GSAP 3 + ScrollTrigger. CSS initial clip = from GSAP (anti-flash).
 Cleanup via `ctx.revert()`.

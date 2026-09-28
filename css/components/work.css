@@ -1,16 +1,46 @@
-/* Work — réalisation cards + image hover */
+/* Work — réalisation cards + rail horizontal (desktop)
+ * GSAP anime `.work-card` / `.work-rail` ; hover sur `__shell`.
+ */
+.work-track {
+  overflow: hidden;
+  width: 100%;
+}
+
+.work-rail {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1.5rem;
+  will-change: transform;
+}
+
+.work-rail .work-card-wrap {
+  flex: 0 0 min(400px, 82vw);
+  max-width: 440px;
+}
+
 .work-card {
+  height: 100%;
+}
+
+.work-card__shell {
   height: 100%;
   overflow: hidden;
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.82);
   border: 1px solid rgba(16, 24, 32, 0.06);
   box-shadow: var(--shadow);
-  transition: transform 0.25s ease;
+  transition: box-shadow 0.25s ease;
 }
 
-.work-card:hover {
-  transform: translateY(-5px);
+.work-card__shell:hover {
+  box-shadow: 0 28px 50px rgba(16, 24, 32, 0.14);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .work-card__shell:hover {
+    transform: translateY(-5px);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+  }
 }
 
 .work-media {
@@ -24,7 +54,7 @@
   transition: transform 0.45s ease;
 }
 
-.work-card:hover .work-media img {
+.work-card__shell:hover .work-media img {
   transform: scale(1.04);
 }
 
@@ -50,4 +80,29 @@
   margin: 0;
   color: var(--muted);
   font-size: 0.98rem;
+}
+
+@media (max-width: 991.98px) {
+  .work-rail {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    transform: none !important;
+  }
+
+  .work-rail .work-card-wrap {
+    flex: none;
+    max-width: none;
+  }
+
+  /* Filet de sécu resize : pas de scale/opacity fantômes GSAP */
+  .work-card {
+    transform: none;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .work-rail {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

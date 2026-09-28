@@ -1,11 +1,5 @@
 # Hero
 
-## Dépendances
-- GSAP 3 + ScrollTrigger
-- Styles `.hero` / `.c-hero` (voir `css/styles.css`)
+`initHero(root?)` — brand stroke, titre split lines, label vertical parallax, photo scrub.
 
-## API
-`initHero(root?)` → cleanup `() => void`
-
-## Intégration
-Voir `snippet.html`. Compatible classes `.hero` ou `.c-hero`.
+Peer : GSAP 3 + ScrollTrigger. Reduced-motion → skip.

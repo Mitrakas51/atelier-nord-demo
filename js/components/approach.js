@@ -1,8 +1,10 @@
+/**
+ * Approach — batch fade-up once des cards.
+ * Peer: GSAP + ScrollTrigger. Hover sur `__inner` (pas le nœud GSAP).
+ */
 import { ensureGsapPlugins, prefersReducedMotion } from "./motion-utils.js";
 
 /**
- * Approach cards — chaque carte se révèle à son entrée viewport
- * (évite le stagger section qui anime hors écran les suivantes).
  * @param {ParentNode} [root=document]
  * @returns {() => void}
  */
@@ -18,25 +20,21 @@ export function initApproach(root = document) {
   if (cards.length === 0) return () => {};
 
   const ctx = gsap.context(() => {
-    cards.forEach((card) => {
-      gsap.fromTo(
-        card,
-        { y: 48, opacity: 0 },
-        {
+    gsap.set(cards, { y: 48, opacity: 0 });
+
+    ScrollTrigger.batch(cards, {
+      start: "top 88%",
+      once: true,
+      onEnter: (batch) => {
+        gsap.to(batch, {
           y: 0,
           opacity: 1,
           duration: 0.7,
+          stagger: 0.1,
           ease: "power2.out",
-          // clearProps : laisse le hover CSS (translateY) reprendre la main
-          clearProps: "transform",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 88%",
-            toggleActions: "play none none reverse",
-            invalidateOnRefresh: true,
-          },
-        }
-      );
+          overwrite: true,
+        });
+      },
     });
   }, root);
 

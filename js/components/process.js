@@ -1,7 +1,10 @@
+/**
+ * Process — barre scaleX scrub + steps reveal (desktop + mobile).
+ * Peer: GSAP + ScrollTrigger. Pas de pin.
+ */
 import { ensureGsapPlugins, prefersReducedMotion } from "./motion-utils.js";
 
 /**
- * Process timeline — barre de progression + activation des étapes.
  * @param {ParentNode} [root=document]
  * @returns {() => void}
  */
@@ -18,17 +21,20 @@ export function initProcess(root = document) {
         const progress = section.querySelector(
           ".process-line-progress, .c-process__progress"
         );
-        const steps = section.querySelectorAll(".process-step, .c-process__step");
+        const steps = gsap.utils.toArray(
+          section.querySelectorAll(".process-step, .c-process__step")
+        );
 
         if (track && progress) {
+          gsap.set(progress, { scaleX: 0, transformOrigin: "left center" });
           gsap.to(progress, {
-            width: "100%",
+            scaleX: 1,
             ease: "none",
             scrollTrigger: {
               trigger: track,
               start: "top 65%",
               end: "bottom 50%",
-              scrub: 0.4,
+              scrub: true,
               onUpdate: (self) => {
                 const active = Math.min(
                   steps.length - 1,
@@ -49,7 +55,7 @@ export function initProcess(root = document) {
           scrollTrigger: {
             trigger: track || section,
             start: "top 70%",
-            toggleActions: "play none none reverse",
+            once: true,
           },
         });
       },
@@ -63,7 +69,7 @@ export function initProcess(root = document) {
           scrollTrigger: {
             trigger: section,
             start: "top 80%",
-            toggleActions: "play none none reverse",
+            once: true,
           },
         });
       },

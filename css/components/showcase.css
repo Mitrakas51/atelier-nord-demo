@@ -1,4 +1,6 @@
-/* Showcase — clip-path reveal media + copy */
+/* Showcase — clip-path reveal media + copy
+ * CSS initial = même clip que le from GSAP (anti flash).
+ */
 .showcase-media {
   position: relative;
 }
@@ -7,13 +9,15 @@
   overflow: hidden;
   border-radius: calc(var(--radius) + 0.2rem);
   box-shadow: var(--shadow);
-  clip-path: inset(8% 8% 8% 8%);
+  clip-path: inset(12% 14% 12% 14% round 18px);
 }
 
 .showcase-reveal img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+  transform: scale(1.06);
+  transform-origin: center;
 }
 
 .showcase-list {

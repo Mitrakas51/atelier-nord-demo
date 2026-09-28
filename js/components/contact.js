@@ -1,7 +1,10 @@
+/**
+ * Contact — preventDefault formulaire démo + reveal panneau.
+ * Peer: GSAP + ScrollTrigger. Formulaire toujours bindé (même reduced-motion).
+ */
 import { ensureGsapPlugins, prefersReducedMotion } from "./motion-utils.js";
 
 /**
- * Contact — reveal panneau + preventDefault sur le formulaire démo.
  * @param {ParentNode} [root=document]
  * @returns {() => void}
  */

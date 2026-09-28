@@ -1,8 +1,9 @@
 import { ensureGsapPlugins, prefersReducedMotion } from "./motion-utils.js";
 
 /**
- * Precision — pin de toute la scène (métrique + panneau).
- * Une seule composition figée ; le scroll fait avancer 3 étapes synchronisées.
+ * Precision — desktop : pin stage + master timeline scrub.
+ * Mobile : panels empilés + fade-up batch (pas de pin).
+ * Cleanup explicite au resize / breakpoint (visibilité / transforms).
  * @param {ParentNode} [root=document]
  * @returns {() => void}
  */
@@ -18,127 +19,188 @@ export function initPrecision(root = document) {
     { value: 0, label: "Surprise à la livraison" },
   ];
 
+  const stage = section.querySelector(".precision-stage, .c-precision__stage");
+  const metricEl = section.querySelector("[data-metric], .precision-metric");
+  const labelEl = section.querySelector(
+    "[data-metric-label], .precision-metric-label"
+  );
+  const bar = section.querySelector("[data-bar], .precision-progress-bar");
+  const glow = section.querySelector(".precision-glow, .c-precision__glow");
+  const panels = () =>
+    gsap.utils.toArray(section.querySelectorAll(".precision-panel"));
+  const dots = () =>
+    gsap.utils.toArray(section.querySelectorAll("[data-step-dot]"));
+
+  /** État neutre lisible (surtout avant layout mobile empilé). */
+  const resetPrecisionLayout = () => {
+    const list = panels();
+    if (list.length) {
+      gsap.set(list, {
+        clearProps: "opacity,visibility,transform,y,x",
+      });
+      list.forEach((panel, i) => {
+        panel.classList.toggle("is-active", i === 0);
+        panel.style.visibility = "";
+        panel.style.opacity = "";
+      });
+    }
+    if (bar) gsap.set(bar, { clearProps: "transform,scaleX" });
+    if (glow) gsap.set(glow, { clearProps: "transform,x,y,scale" });
+    if (metricEl) metricEl.textContent = String(steps[0].value);
+    if (labelEl) labelEl.textContent = steps[0].label;
+    dots().forEach((dot, n) => dot.classList.toggle("is-active", n === 0));
+  };
+
   const ctx = gsap.context(() => {
     ScrollTrigger.matchMedia({
       "(min-width: 992px)": () => {
-        const stage = section.querySelector(".precision-stage, .c-precision__stage");
-        const metricEl = section.querySelector("[data-metric], .precision-metric");
-        const labelEl = section.querySelector(
-          "[data-metric-label], .precision-metric-label"
-        );
-        const bar = section.querySelector("[data-bar], .precision-progress-bar");
-        const panels = gsap.utils.toArray(section.querySelectorAll(".precision-panel"));
-        const dots = gsap.utils.toArray(section.querySelectorAll("[data-step-dot]"));
-        const glow = section.querySelector(".precision-glow, .c-precision__glow");
-
-        if (!stage || panels.length === 0) return;
+        resetPrecisionLayout();
+        const list = panels();
+        if (!stage || list.length === 0) return;
 
         const metric = { value: steps[0].value };
-        const state = { idx: -1 };
+        const stepDots = dots();
 
-        gsap.set(panels, { opacity: 0, y: 28, visibility: "hidden" });
-        gsap.set(panels[0], { opacity: 1, y: 0, visibility: "visible" });
+        gsap.set(list, { opacity: 0, y: 24, visibility: "hidden" });
+        gsap.set(list[0], { opacity: 1, y: 0, visibility: "visible" });
+        if (bar) gsap.set(bar, { scaleX: 0, transformOrigin: "left center" });
 
-        const showStep = (i) => {
-          if (i === state.idx) return;
-          const prev = state.idx;
-          state.idx = i;
-          const s = steps[i] || steps[0];
-
-          if (labelEl) {
-            gsap.fromTo(
-              labelEl,
-              { opacity: 0.35, y: 6 },
-              { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", overwrite: "auto" }
-            );
-            labelEl.textContent = s.label;
-          }
-
-          gsap.to(metric, {
-            value: s.value,
-            duration: 0.45,
-            ease: "power2.out",
-            overwrite: "auto",
-            onUpdate: () => {
+        const tl = gsap.timeline({
+          defaults: { ease: "none" },
+          scrollTrigger: {
+            trigger: stage,
+            start: "top 10%",
+            end: () => `+=${Math.round(window.innerHeight * 1.55)}`,
+            pin: true,
+            pinSpacing: true,
+            anticipatePin: 1,
+            scrub: true,
+            invalidateOnRefresh: true,
+            fastScrollEnd: true,
+            onUpdate: (self) => {
+              const i = Math.min(
+                steps.length - 1,
+                Math.floor(self.progress * steps.length + 0.001)
+              );
+              stepDots.forEach((dot, n) =>
+                dot.classList.toggle("is-active", n === i)
+              );
+              list.forEach((panel, n) =>
+                panel.classList.toggle("is-active", n === i)
+              );
+              if (labelEl) labelEl.textContent = steps[i].label;
               if (metricEl) metricEl.textContent = String(Math.round(metric.value));
             },
-          });
-
-          panels.forEach((panel, n) => {
-            const on = n === i;
-            panel.classList.toggle("is-active", on);
-            if (on) {
-              gsap.fromTo(
-                panel,
-                { opacity: 0, y: prev < i ? 28 : -18, visibility: "visible" },
-                {
-                  opacity: 1,
-                  y: 0,
-                  duration: 0.45,
-                  ease: "power3.out",
-                  overwrite: "auto",
-                }
-              );
-            } else if (n === prev) {
-              gsap.to(panel, {
-                opacity: 0,
-                y: prev < i ? -18 : 18,
-                visibility: "hidden",
-                duration: 0.3,
-                ease: "power2.in",
-                overwrite: "auto",
-              });
-            } else {
-              gsap.set(panel, { opacity: 0, visibility: "hidden", y: 28 });
-            }
-          });
-
-          dots.forEach((dot, n) => {
-            dot.classList.toggle("is-active", n === i);
-          });
-        };
-
-        showStep(0);
-
-        ScrollTrigger.create({
-          trigger: stage,
-          start: "top 80px",
-          end: () => `+=${Math.round(window.innerHeight * 1.65)}`,
-          pin: true,
-          pinSpacing: true,
-          anticipatePin: 1,
-          scrub: 0.65,
-          snap: {
-            snapTo: 1 / (steps.length - 1),
-            duration: { min: 0.12, max: 0.35 },
-            ease: "power1.inOut",
-          },
-          onUpdate: (self) => {
-            const i = Math.min(
-              steps.length - 1,
-              Math.floor(self.progress * steps.length + 0.001)
-            );
-            showStep(i);
-            if (bar) gsap.set(bar, { scaleX: self.progress, transformOrigin: "left center" });
           },
         });
 
-        if (bar) gsap.set(bar, { scaleX: 0, transformOrigin: "left center" });
+        tl.addLabel("step0", 0);
+        if (bar) tl.to(bar, { scaleX: 1 / 3 }, "step0");
+        if (glow) tl.to(glow, { x: -8, y: -4, scale: 1.03 }, "step0");
+        tl.to(metric, { value: steps[0].value, duration: 0.001 }, "step0");
 
+        tl.addLabel("step1", 0.5);
+        tl.to(
+          list[0],
+          { opacity: 0, y: -16, visibility: "hidden", duration: 0.25 },
+          "step1-=0.25"
+        );
+        tl.fromTo(
+          list[1],
+          { opacity: 0, y: 24, visibility: "visible" },
+          { opacity: 1, y: 0, duration: 0.25 },
+          "step1-=0.15"
+        );
+        tl.to(metric, { value: steps[1].value, duration: 0.35 }, "step1-=0.2");
+        if (bar) tl.to(bar, { scaleX: 2 / 3, duration: 0.35 }, "step1-=0.2");
         if (glow) {
-          gsap.to(glow, {
-            x: -24,
-            y: -14,
-            scale: 1.1,
+          tl.to(glow, { x: -16, y: -8, scale: 1.06, duration: 0.35 }, "step1-=0.2");
+        }
+
+        tl.addLabel("step2", 1);
+        tl.to(
+          list[1],
+          { opacity: 0, y: -16, visibility: "hidden", duration: 0.25 },
+          "step2-=0.25"
+        );
+        tl.fromTo(
+          list[2],
+          { opacity: 0, y: 24, visibility: "visible" },
+          { opacity: 1, y: 0, duration: 0.25 },
+          "step2-=0.15"
+        );
+        tl.to(metric, { value: steps[2].value, duration: 0.35 }, "step2-=0.2");
+        if (bar) tl.to(bar, { scaleX: 1, duration: 0.35 }, "step2-=0.2");
+        if (glow) {
+          tl.to(
+            glow,
+            { x: -24, y: -14, scale: 1.1, duration: 0.35 },
+            "step2-=0.2"
+          );
+        }
+
+        return () => {
+          tl.scrollTrigger?.kill();
+          tl.kill();
+          resetPrecisionLayout();
+        };
+      },
+
+      "(max-width: 991px)": () => {
+        resetPrecisionLayout();
+
+        const list = panels();
+        if (list.length === 0) return;
+
+        // Metric / barre : scrub léger sur la section (pas de pin)
+        if (bar) {
+          gsap.set(bar, { scaleX: 0, transformOrigin: "left center" });
+          gsap.to(bar, {
+            scaleX: 1,
             ease: "none",
             scrollTrigger: {
-              trigger: stage,
-              start: "top 80px",
-              end: () => `+=${Math.round(window.innerHeight * 1.65)}`,
+              trigger: section,
+              start: "top 70%",
+              end: "bottom 55%",
               scrub: true,
+              invalidateOnRefresh: true,
+              onUpdate: (self) => {
+                const i = Math.min(
+                  steps.length - 1,
+                  Math.floor(self.progress * steps.length + 0.001)
+                );
+                if (metricEl) metricEl.textContent = String(steps[i].value);
+                if (labelEl) labelEl.textContent = steps[i].label;
+                dots().forEach((dot, n) =>
+                  dot.classList.toggle("is-active", n === i)
+                );
+                list.forEach((panel, n) =>
+                  panel.classList.toggle("is-active", n <= i)
+                );
+              },
             },
           });
         }
+
+        gsap.set(list, { y: 28, opacity: 0 });
+        ScrollTrigger.batch(list, {
+          start: "top 92%",
+          once: true,
+          onEnter: (batch) => {
+            gsap.to(batch, {
+              y: 0,
+              opacity: 1,
+              duration: 0.6,
+              stagger: 0.12,
+              ease: "power2.out",
+              overwrite: "auto",
+            });
+          },
+        });
+
+        return () => {
+          resetPrecisionLayout();
+        };
       },
     });
   }, root);

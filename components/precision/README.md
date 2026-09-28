@@ -1,6 +1,9 @@
 # Precision
 
-`initPrecision(root?)` — pin de toute la scène (métrique + panneau) sur desktop ≥992px.
+`initPrecision(root?)` — section `#precision`.
 
-Le scroll avance 3 étapes synchronisées (métrique, texte, dots, barre) avec snap.
-Sur mobile : panneaux empilés, pas de pin.
+- **≥992px** : pin `.precision-stage` + timeline scrub (panels / métrique / barre / glow).
+- **&lt;992px** : panels empilés, batch fade-up + barre scrub sans pin.
+- **Resize** : reset visibilité/transforms au changement de breakpoint.
+
+Peer : GSAP + ScrollTrigger. Reduced-motion → skip.
