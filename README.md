@@ -12,8 +12,9 @@ Réalisée dans le cadre d’une candidature freelance (intégrateur / Front-end
 
 ## Démo en ligne
 
-> Après déploiement Vercel, remplacer par l’URL :  
-> `https://….vercel.app`
+**Live :** [https://atelier-nord-demo-green.vercel.app](https://atelier-nord-demo-green.vercel.app)
+
+**Code :** [github.com/Mitrakas51/atelier-nord-demo](https://github.com/Mitrakas51/atelier-nord-demo)
 
 ## Lancer en local
 
