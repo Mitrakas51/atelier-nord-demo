@@ -1,7 +1,7 @@
 import { ensureGsapPlugins, prefersReducedMotion } from "./motion-utils.js";
 
 /**
- * Process timeline progress + step reveals.
+ * Process timeline — barre de progression + activation des étapes.
  * @param {ParentNode} [root=document]
  * @returns {() => void}
  */
@@ -18,6 +18,8 @@ export function initProcess(root = document) {
         const progress = section.querySelector(
           ".process-line-progress, .c-process__progress"
         );
+        const steps = section.querySelectorAll(".process-step, .c-process__step");
+
         if (track && progress) {
           gsap.to(progress, {
             width: "100%",
@@ -25,13 +27,20 @@ export function initProcess(root = document) {
             scrollTrigger: {
               trigger: track,
               start: "top 65%",
-              end: "bottom 55%",
+              end: "bottom 50%",
               scrub: 0.4,
+              onUpdate: (self) => {
+                const active = Math.min(
+                  steps.length - 1,
+                  Math.floor(self.progress * steps.length)
+                );
+                steps.forEach((el, i) => el.classList.toggle("is-active", i <= active));
+              },
             },
           });
         }
 
-        gsap.from(section.querySelectorAll(".process-step, .c-process__step"), {
+        gsap.from(steps, {
           y: 28,
           opacity: 0,
           duration: 0.55,
@@ -40,6 +49,20 @@ export function initProcess(root = document) {
           scrollTrigger: {
             trigger: track || section,
             start: "top 70%",
+            toggleActions: "play none none reverse",
+          },
+        });
+      },
+      "(max-width: 991px)": () => {
+        gsap.from(section.querySelectorAll(".process-step, .c-process__step"), {
+          y: 24,
+          opacity: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%",
             toggleActions: "play none none reverse",
           },
         });

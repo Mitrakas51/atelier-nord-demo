@@ -1,8 +1,37 @@
 <section class="section section-precision c-precision">
-  <div class="precision-visual c-precision__visual pin-target">
-    <div class="precision-frame">
-      <div class="precision-glow c-precision__glow" aria-hidden="true"></div>
-      <h2 class="precision-title c-precision__title">Titre</h2>
+  <div class="container">
+    <div class="precision-stage c-precision__stage">
+      <div class="row g-4 g-lg-5 align-items-center precision-stage__row">
+        <div class="col-lg-5">
+          <div class="precision-visual c-precision__visual">
+            <div class="precision-frame">
+              <div class="precision-glow c-precision__glow" aria-hidden="true"></div>
+              <p class="precision-label">Qualité d’intégration</p>
+              <p class="precision-metric c-precision__metric" data-metric>96</p>
+              <p class="precision-metric-label c-precision__metric-label" data-metric-label>
+                Score perf. cible
+              </p>
+              <div class="precision-progress" aria-hidden="true">
+                <span class="precision-progress-bar c-precision__bar" data-bar></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="precision-copy">
+            <div class="precision-panels c-precision__panels">
+              <article class="precision-panel is-active" data-step="0">…</article>
+              <article class="precision-panel" data-step="1">…</article>
+              <article class="precision-panel" data-step="2">…</article>
+            </div>
+            <ol class="precision-steps">
+              <li class="precision-step is-active" data-step-dot="0"><span>01</span> Structure</li>
+              <li class="precision-step" data-step-dot="1"><span>02</span> Responsive</li>
+              <li class="precision-step" data-step-dot="2"><span>03</span> Motion</li>
+            </ol>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>

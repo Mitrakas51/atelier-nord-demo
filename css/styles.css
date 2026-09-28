@@ -1,4 +1,4 @@
-/* Atelier Nord — démo intégration Front-end */
+/* Atelier Nord — landing agence / intégration Front-end */
 :root {
   --ink: #101820;
   --ink-soft: #243040;
@@ -30,9 +30,9 @@ body {
   font-family: var(--font-body);
   color: var(--ink);
   background:
-    radial-gradient(1200px 500px at 10% -10%, rgba(20, 184, 166, 0.12), transparent 60%),
-    radial-gradient(900px 400px at 100% 0%, rgba(215, 196, 163, 0.18), transparent 55%),
-    linear-gradient(180deg, var(--fog) 0%, var(--mist) 45%, #dde6ec 100%);
+    radial-gradient(1200px 500px at 10% -10%, rgba(20, 184, 166, 0.1), transparent 60%),
+    radial-gradient(900px 400px at 100% 8%, rgba(215, 196, 163, 0.16), transparent 55%),
+    linear-gradient(180deg, var(--fog) 0%, var(--mist) 50%, #dbe4eb 100%);
   line-height: 1.6;
   overflow-x: hidden;
 }
@@ -42,7 +42,7 @@ h2,
 h3,
 .brand,
 .hero-brand,
-.precision-title {
+.proof-title {
   font-family: var(--font-display);
   letter-spacing: -0.03em;
   line-height: 1.1;
@@ -50,6 +50,7 @@ h3,
 
 img {
   max-width: 100%;
+  height: auto;
   display: block;
 }
 
@@ -62,10 +63,32 @@ a:hover {
   color: var(--ink);
 }
 
+:focus-visible {
+  outline: 3px solid var(--teal-bright);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 2000;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--white);
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  top: 1rem;
+  color: var(--white);
+}
+
 .eyebrow {
   display: inline-block;
   margin-bottom: 0.75rem;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -73,18 +96,19 @@ a:hover {
 }
 
 .section {
-  padding: 6rem 0;
+  padding: clamp(4rem, 8vw, 6.5rem) 0;
 }
 
 .section-heading {
   max-width: 40rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2.75rem;
 }
 
 .section-heading h2,
 .precision-copy h2,
-.contact-panel h2 {
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
+.contact-panel h2,
+.showcase-copy h2 {
+  font-size: clamp(1.85rem, 3.2vw, 2.65rem);
   margin-bottom: 1rem;
 }
 
@@ -98,8 +122,8 @@ a:hover {
   position: fixed;
   inset: 0 0 auto;
   z-index: 1000;
-  background: rgba(244, 247, 249, 0.82);
-  backdrop-filter: blur(12px);
+  background: rgba(244, 247, 249, 0.88);
+  backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(16, 24, 32, 0.06);
 }
 
@@ -119,15 +143,22 @@ a:hover {
   font-weight: 500;
 }
 
+.nav-link:hover {
+  color: var(--teal) !important;
+}
+
 .nav-cta {
   padding: 0.45rem 1rem !important;
   border-radius: 999px;
   background: var(--ink);
   color: var(--white) !important;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .nav-cta:hover {
-  background: var(--teal);
+  background: var(--teal) !important;
+  color: var(--white) !important;
+  transform: translateY(-1px);
 }
 
 .navbar-toggler {
@@ -152,46 +183,49 @@ a:hover {
 .hero-atmosphere {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(120deg, rgba(16, 24, 32, 0.88) 0%, rgba(16, 24, 32, 0.55) 48%, rgba(15, 118, 110, 0.35) 100%),
-    radial-gradient(circle at 70% 30%, rgba(20, 184, 166, 0.35), transparent 40%),
-    linear-gradient(160deg, #142033 0%, #0f766e 55%, #1c1917 100%);
-  background-size: cover;
-  transform-origin: center;
+  overflow: hidden;
 }
 
-.hero-atmosphere::after {
+.hero-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+}
+
+.hero-atmosphere::before {
   content: "";
   position: absolute;
-  inset: auto 0 0;
-  height: 28%;
-  background: linear-gradient(to top, rgba(244, 247, 249, 0.95), transparent);
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(120deg, rgba(16, 24, 32, 0.9) 0%, rgba(16, 24, 32, 0.55) 48%, rgba(15, 118, 110, 0.4) 100%),
+    linear-gradient(to top, rgba(244, 247, 249, 0.92) 0%, transparent 32%);
 }
 
 .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 48rem;
-  padding-bottom: 1rem;
 }
 
 .hero-brand {
-  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-size: clamp(2.5rem, 7vw, 4.75rem);
   font-weight: 800;
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
 }
 
 .hero-title {
-  font-size: clamp(1.6rem, 3.4vw, 2.5rem);
+  font-size: clamp(1.55rem, 3.3vw, 2.45rem);
   font-weight: 700;
   margin-bottom: 1.1rem;
-  max-width: 18ch;
+  max-width: 16ch;
 }
 
 .hero-lead {
   font-size: 1.125rem;
-  max-width: 36ch;
-  color: rgba(255, 255, 255, 0.86);
+  max-width: 38ch;
+  color: rgba(255, 255, 255, 0.88);
   margin-bottom: 2rem;
 }
 
@@ -211,6 +245,12 @@ a:hover {
   font-weight: 600;
   border-radius: 999px;
   padding-inline: 1.35rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(20, 184, 166, 0.35);
 }
 
 .btn-outline-light {
@@ -219,104 +259,27 @@ a:hover {
   padding-inline: 1.35rem;
 }
 
-/* Approche */
-.section-approche {
-  padding-top: 4rem;
-}
+/* Approach / Showcase / Work / Precision → css/components/*.css */
 
-.approach-item {
-  height: 100%;
-  padding: 1.75rem;
+/* Offers accordion */
+.offers-accordion {
+  max-width: 48rem;
+  --bs-accordion-bg: rgba(255, 255, 255, 0.82);
+  --bs-accordion-border-color: rgba(16, 24, 32, 0.08);
+  --bs-accordion-btn-focus-box-shadow: 0 0 0 0.2rem rgba(20, 184, 166, 0.2);
+  --bs-accordion-active-bg: rgba(20, 184, 166, 0.12);
+  --bs-accordion-active-color: var(--ink);
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(16, 24, 32, 0.06);
+  overflow: hidden;
   box-shadow: var(--shadow);
 }
 
-.approach-index {
-  display: inline-block;
-  margin-bottom: 1rem;
+.offers-accordion .accordion-button {
   font-family: var(--font-display);
   font-weight: 700;
-  color: var(--teal);
 }
 
-.approach-item h3 {
-  font-size: 1.35rem;
-  margin-bottom: 0.75rem;
-}
-
-.approach-item p {
-  margin: 0;
-  color: var(--muted);
-}
-
-/* Precision */
-.section-precision {
-  background: linear-gradient(180deg, transparent, rgba(16, 24, 32, 0.03), transparent);
-}
-
-.precision-visual {
-  min-height: 420px;
-}
-
-.precision-frame {
-  position: relative;
-  height: 100%;
-  min-height: 420px;
-  padding: 2.5rem;
-  border-radius: calc(var(--radius) + 0.35rem);
-  overflow: hidden;
-  color: var(--white);
-  background:
-    linear-gradient(145deg, rgba(16, 24, 32, 0.92), rgba(15, 118, 110, 0.78)),
-    radial-gradient(circle at 20% 20%, rgba(215, 196, 163, 0.35), transparent 45%);
-  box-shadow: var(--shadow);
-}
-
-.precision-glow {
-  position: absolute;
-  width: 220px;
-  height: 220px;
-  right: -40px;
-  bottom: -40px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(20, 184, 166, 0.55), transparent 70%);
-  filter: blur(8px);
-}
-
-.precision-label,
-.precision-title {
-  position: relative;
-  z-index: 1;
-}
-
-.precision-label {
-  margin-bottom: 1.5rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 0.78rem;
-  opacity: 0.85;
-}
-
-.precision-title {
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  font-weight: 800;
-  max-width: 12ch;
-}
-
-.precision-list {
-  margin: 1.5rem 0 0;
-  padding-left: 1.1rem;
-  color: var(--muted);
-}
-
-.precision-list li + li {
-  margin-top: 0.45rem;
-}
-
-.precision-copy .section-lead,
-.precision-copy p {
+.offers-accordion .accordion-body {
   color: var(--muted);
 }
 
@@ -339,8 +302,14 @@ a:hover {
   position: relative;
   padding: 1.5rem 1.5rem 1.5rem 1.75rem;
   border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.78);
   border: 1px solid rgba(16, 24, 32, 0.06);
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.process-step.is-active {
+  border-color: rgba(20, 184, 166, 0.45);
+  transform: translateY(-2px);
 }
 
 .process-dot {
@@ -354,7 +323,7 @@ a:hover {
 }
 
 .process-step h3 {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   margin-bottom: 0.4rem;
 }
 
@@ -393,6 +362,44 @@ a:hover {
     border: 0;
     padding: 0;
   }
+
+  .process-step.is-active {
+    transform: none;
+  }
+}
+
+/* Proof */
+.section-proof {
+  padding-top: 0;
+}
+
+.proof-banner {
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border-radius: var(--radius);
+  text-align: center;
+  background: linear-gradient(135deg, rgba(16, 24, 32, 0.95), rgba(15, 118, 110, 0.88));
+  color: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.proof-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.proof-stack {
+  margin-bottom: 0.75rem;
+  opacity: 0.9;
+}
+
+.proof-links a {
+  color: var(--teal-bright);
+  font-weight: 600;
+}
+
+.proof-links a:hover {
+  color: var(--white);
 }
 
 /* Contact */
@@ -400,7 +407,7 @@ a:hover {
   padding: clamp(1.75rem, 4vw, 3rem);
   border-radius: calc(var(--radius) + 0.25rem);
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(232, 238, 242, 0.92)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(232, 238, 242, 0.94)),
     var(--white);
   border: 1px solid rgba(16, 24, 32, 0.06);
   box-shadow: var(--shadow);
@@ -415,7 +422,7 @@ a:hover {
   border-radius: 0.85rem;
   border-color: rgba(16, 24, 32, 0.12);
   padding: 0.75rem 0.95rem;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
 }
 
 .form-control:focus {
@@ -434,7 +441,10 @@ a:hover {
   font-weight: 600;
 }
 
-/* Reduced motion */
+.footer-meta {
+  opacity: 0.95;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -442,11 +452,17 @@ a:hover {
 
   .reveal-load,
   .reveal-card,
+  .reveal-work,
   .reveal-contact,
   .process-step,
-  .precision-title,
-  .precision-glow {
+  .precision-glow,
+  .showcase-reveal,
+  .work-media img,
+  .approach-item,
+  .work-card {
     opacity: 1 !important;
     transform: none !important;
+    transition: none !important;
+    clip-path: none !important;
   }
 }

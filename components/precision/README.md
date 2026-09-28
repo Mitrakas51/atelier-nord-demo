@@ -1,4 +1,6 @@
 # Precision
 
-`initPrecision(root?)` — scrub + pin court (matchMedia ≥768px).  
-Ne pas animer l’élément pinné lui-même (doc ScrollTrigger).
+`initPrecision(root?)` — pin de toute la scène (métrique + panneau) sur desktop ≥992px.
+
+Le scroll avance 3 étapes synchronisées (métrique, texte, dots, barre) avec snap.
+Sur mobile : panneaux empilés, pas de pin.

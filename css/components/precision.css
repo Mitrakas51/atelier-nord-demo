@@ -1,0 +1,184 @@
+/* Precision — scène pinnée synchronisée (desktop ≥992) */
+.section-precision {
+  background: linear-gradient(180deg, transparent, rgba(16, 24, 32, 0.035), transparent);
+}
+
+.precision-stage {
+  min-height: min(72vh, 640px);
+  display: flex;
+  align-items: center;
+}
+
+.precision-stage__row {
+  width: 100%;
+}
+
+.precision-visual {
+  min-height: 340px;
+}
+
+.precision-frame {
+  position: relative;
+  min-height: 340px;
+  padding: 2.35rem;
+  border-radius: calc(var(--radius) + 0.35rem);
+  overflow: hidden;
+  color: var(--white);
+  background:
+    linear-gradient(145deg, rgba(16, 24, 32, 0.94), rgba(15, 118, 110, 0.78)),
+    radial-gradient(circle at 20% 20%, rgba(215, 196, 163, 0.35), transparent 45%);
+  box-shadow: var(--shadow);
+}
+
+.precision-glow {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  right: -40px;
+  bottom: -40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.55), transparent 70%);
+  filter: blur(8px);
+  will-change: transform;
+}
+
+.precision-label,
+.precision-metric,
+.precision-metric-label,
+.precision-progress {
+  position: relative;
+  z-index: 1;
+}
+
+.precision-label {
+  margin-bottom: 1.25rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  opacity: 0.85;
+}
+
+.precision-metric {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 5.5rem);
+  font-weight: 800;
+  line-height: 1;
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.precision-metric-label {
+  margin: 0.35rem 0 1.75rem;
+  opacity: 0.85;
+  min-height: 1.5em;
+}
+
+.precision-progress {
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.precision-progress-bar {
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--sand), var(--teal-bright));
+}
+
+.precision-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.precision-panels {
+  position: relative;
+  min-height: 13.5rem;
+}
+
+.precision-panel {
+  padding: 0.25rem 0;
+}
+
+.precision-panel h2 {
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  margin-bottom: 0.85rem;
+}
+
+.precision-panel p:last-child {
+  margin: 0;
+  color: var(--muted);
+  max-width: 36ch;
+  font-size: 1.05rem;
+}
+
+.precision-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.precision-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+  opacity: 0.55;
+  transition: opacity 0.25s ease, color 0.25s ease;
+}
+
+.precision-step span {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: var(--teal);
+}
+
+.precision-step.is-active {
+  opacity: 1;
+  color: var(--ink);
+}
+
+@media (min-width: 992px) {
+  .precision-panels {
+    min-height: 15rem;
+  }
+
+  .precision-panel {
+    position: absolute;
+    inset: 0 auto auto 0;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  .precision-panel.is-active {
+    pointer-events: auto;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .precision-stage {
+    min-height: 0;
+    display: block;
+  }
+
+  .precision-panel + .precision-panel {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(16, 24, 32, 0.08);
+  }
+
+  .precision-steps {
+    display: none;
+  }
+}

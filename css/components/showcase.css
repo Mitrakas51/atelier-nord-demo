@@ -1,0 +1,27 @@
+/* Showcase — clip-path reveal media + copy */
+.showcase-media {
+  position: relative;
+}
+
+.showcase-reveal {
+  overflow: hidden;
+  border-radius: calc(var(--radius) + 0.2rem);
+  box-shadow: var(--shadow);
+  clip-path: inset(8% 8% 8% 8%);
+}
+
+.showcase-reveal img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.showcase-list {
+  margin: 1.5rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+}
+
+.showcase-list li + li {
+  margin-top: 0.4rem;
+}

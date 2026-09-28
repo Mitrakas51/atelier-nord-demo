@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Atelier Nord — démo d'intégration Front-end HTML/CSS/JS, Bootstrap 5 et GSAP ScrollTrigger."
+      content="Atelier Nord — studio d’intégration web pour le tertiaire. Interfaces responsives, HTML/CSS/JS, Bootstrap 5, GSAP ScrollTrigger."
     />
     <meta name="theme-color" content="#101820" />
-    <meta property="og:title" content="Atelier Nord — Intégration Front-end" />
+    <meta property="og:title" content="Atelier Nord — Interfaces web pour le tertiaire" />
     <meta
       property="og:description"
-      content="Démo HTML/CSS/JS · Bootstrap 5 · GSAP ScrollTrigger (sans Three.js)."
+      content="Intégration Front-end soignée · Bootstrap 5 · GSAP ScrollTrigger."
     />
     <meta property="og:type" content="website" />
-    <title>Atelier Nord — Intégration Front-end</title>
+    <title>Atelier Nord — Interfaces web pour le tertiaire</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap"
       rel="stylesheet"
@@ -29,10 +30,16 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/components/approach.css" />
+    <link rel="stylesheet" href="css/components/showcase.css" />
+    <link rel="stylesheet" href="css/components/work.css" />
+    <link rel="stylesheet" href="css/components/precision.css" />
   </head>
   <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+
     <header class="site-header">
-      <nav class="navbar navbar-expand-lg">
+      <nav class="navbar navbar-expand-lg" aria-label="Navigation principale">
         <div class="container">
           <a class="navbar-brand brand" href="#top">Atelier Nord</a>
           <button
@@ -49,10 +56,11 @@
           <div class="collapse navbar-collapse" id="mainNav">
             <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
               <li class="nav-item"><a class="nav-link" href="#approche">Approche</a></li>
+              <li class="nav-item"><a class="nav-link" href="#realisations">Réalisations</a></li>
               <li class="nav-item"><a class="nav-link" href="#precision">Précision</a></li>
-              <li class="nav-item"><a class="nav-link" href="#process">Process</a></li>
+              <li class="nav-item"><a class="nav-link" href="#offres">Offres</a></li>
               <li class="nav-item">
-                <a class="nav-link nav-cta" href="#contact">Discutons</a>
+                <a class="nav-link nav-cta" href="#contact">Parler du projet</a>
               </li>
             </ul>
           </div>
@@ -61,65 +69,74 @@
     </header>
 
     <main id="top">
-      <!-- 1. Hero -->
+      <!-- Hero -->
       <section class="hero c-hero" aria-label="Introduction">
-        <div class="hero-atmosphere c-hero__atmosphere" aria-hidden="true"></div>
-        <div class="container hero-content">
+        <div class="hero-atmosphere c-hero__atmosphere" aria-hidden="true">
+          <img
+            class="hero-photo"
+            src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=80"
+            alt=""
+            width="1920"
+            height="1280"
+            fetchpriority="high"
+          />
+        </div>
+        <div class="container hero-content" id="contenu">
           <p class="hero-brand reveal-load">Atelier Nord</p>
           <h1 class="hero-title reveal-load">
-            Des interfaces nettes,<br />
-            animées avec intention.
+            Des sites nets pour<br />
+            les métiers du tertiaire.
           </h1>
           <p class="hero-lead reveal-load">
-            Intégration Figma → HTML / CSS / JS pour le tertiaire : responsive,
-            performant, maintenable.
+            Nous intégrons vos interfaces web avec exigence : responsive,
+            performantes, animées juste ce qu’il faut — et prêtes à évoluer.
           </p>
           <div class="hero-actions reveal-load">
-            <a class="btn btn-primary btn-lg" href="#approche">Voir l’approche</a>
-            <a class="btn btn-outline-light btn-lg" href="#contact">Me contacter</a>
+            <a class="btn btn-primary btn-lg" href="#realisations">Voir des exemples</a>
+            <a class="btn btn-outline-light btn-lg" href="#contact">Demander un devis</a>
           </div>
         </div>
       </section>
 
-      <!-- 2. Approche -->
+      <!-- Approche -->
       <section id="approche" class="section section-approche c-approach">
         <div class="container">
           <div class="section-heading">
             <p class="eyebrow">Approche</p>
-            <h2>Trois priorités sur chaque intégration</h2>
+            <h2>Ce qui compte sur chaque livraison</h2>
             <p class="section-lead">
-              Un rendu fidèle à la maquette, un code clair, et des animations qui
-              servent le récit — pas le bruit.
+              Fidélité au design, code lisible, animations au service du message —
+              pas d’effets gadget.
             </p>
           </div>
           <div class="row g-4">
             <div class="col-md-4">
-              <article class="approach-item reveal-card">
+              <article class="approach-item reveal-card c-approach__card">
                 <span class="approach-index">01</span>
-                <h3>Pixel & sémantique</h3>
+                <h3>Rendu soigné</h3>
                 <p>
-                  HTML5 propre, CSS maîtrisé, structure accessible. Le détail
-                  compte autant que le design.
+                  HTML5 sémantique, CSS maîtrisé, contrastes et états hover
+                  travaillés jusqu’au détail.
                 </p>
               </article>
             </div>
             <div class="col-md-4">
-              <article class="approach-item reveal-card">
+              <article class="approach-item reveal-card c-approach__card">
                 <span class="approach-index">02</span>
                 <h3>Responsive réel</h3>
                 <p>
-                  Mobile-first avec Bootstrap 5, breakpoints cohérents, et une
-                  lecture confortable sur tous les écrans.
+                  Mobile-first avec Bootstrap 5 : grilles stables, lecture
+                  confortable, pas de « cassé » au resize.
                 </p>
               </article>
             </div>
             <div class="col-md-4">
-              <article class="approach-item reveal-card">
+              <article class="approach-item reveal-card c-approach__card">
                 <span class="approach-index">03</span>
                 <h3>Motion utile</h3>
                 <p>
-                  GSAP + ScrollTrigger pour guider le regard, rythmer le scroll
-                  et renforcer le message.
+                  GSAP + ScrollTrigger pour rythmer le scroll et guider le
+                  regard — avec respect du reduced-motion.
                 </p>
               </article>
             </div>
@@ -127,34 +144,36 @@
         </div>
       </section>
 
-      <!-- 3. Showcase précision -->
-      <section id="precision" class="section section-precision c-precision">
+      <!-- Showcase reveal -->
+      <section id="showcase" class="section section-showcase c-showcase">
         <div class="container">
-          <div class="row align-items-center g-5 precision-row">
-            <div class="col-lg-6">
-              <div class="precision-visual c-precision__visual pin-target">
-                <div class="precision-frame">
-                  <div class="precision-glow c-precision__glow" aria-hidden="true"></div>
-                  <p class="precision-label">Maquettes · Intégration · QA visuelle</p>
-                  <h2 class="precision-title c-precision__title">
-                    Au pixel près,<br />sans sacrifier la perf.
-                  </h2>
+          <div class="row align-items-center g-5">
+            <div class="col-lg-6 order-lg-2">
+              <div class="showcase-media">
+                <div class="showcase-reveal c-showcase__reveal">
+                  <img
+                    src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80"
+                    alt="Espace de travail tertiaire moderne avec grandes baies vitrées"
+                    width="1200"
+                    height="900"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>
-            <div class="col-lg-6">
-              <div class="precision-copy">
-                <p class="eyebrow">Précision</p>
-                <h2>Du Figma au navigateur, proprement</h2>
-                <p>
-                  Espacements, typo, états hover, contrastes : chaque décision
-                  d’intégration vise un rendu stable, lisible et facile à
-                  maintenir pour les prochains projets.
+            <div class="col-lg-6 order-lg-1">
+              <div class="showcase-copy c-showcase__copy">
+                <p class="eyebrow">Expérience</p>
+                <h2>Une lecture claire, un scroll maîtrisé</h2>
+                <p class="section-lead">
+                  Les transitions accompagnent le contenu : reveal d’image,
+                  textes qui s’installent, rythme calme. L’objectif reste la
+                  compréhension — pas le spectacle.
                 </p>
-                <ul class="precision-list">
-                  <li>Grille Bootstrap cohérente</li>
-                  <li>Animations ScrollTrigger contrôlées</li>
-                  <li>Code commenté là où ça aide vraiment</li>
+                <ul class="showcase-list">
+                  <li>Reveal image synchronisé au scroll</li>
+                  <li>Typo et hiérarchie préservées</li>
+                  <li>Comportement allégé sur mobile</li>
                 </ul>
               </div>
             </div>
@@ -162,12 +181,199 @@
         </div>
       </section>
 
-      <!-- 4. Process timeline -->
+      <!-- Réalisations -->
+      <section id="realisations" class="section section-work c-work">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Réalisations</p>
+            <h2>Exemples d’univers tertiaire</h2>
+            <p class="section-lead">
+              Cas fictifs pour illustrer le rendu d’intégration sur des métiers
+              B2B : clarté, confiance, sobriété.
+            </p>
+          </div>
+          <div class="row g-4">
+            <div class="col-md-4">
+              <article class="work-card reveal-work">
+                <div class="work-media">
+                  <img
+                    src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80"
+                    alt="Bureau avec documents et ordinateur portable"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="work-body">
+                  <p class="work-tag">Assurance</p>
+                  <h3>Horizon Mutuelle</h3>
+                  <p>Parcours clair pour comparer offres et prendre rendez-vous.</p>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-4">
+              <article class="work-card reveal-work">
+                <div class="work-media">
+                  <img
+                    src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80"
+                    alt="Façade d’immeuble résidentiel contemporain"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="work-body">
+                  <p class="work-tag">Immobilier</p>
+                  <h3>Ateliers Fonciers</h3>
+                  <p>Vitrine de programmes et filtres d’annonces lisibles.</p>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-4">
+              <article class="work-card reveal-work">
+                <div class="work-media">
+                  <img
+                    src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80"
+                    alt="Poignée de main en réunion professionnelle"
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="work-body">
+                  <p class="work-tag">Conseil</p>
+                  <h3>Cabinet Ligne Droite</h3>
+                  <p>Site corporate sobre avec prise de contact rapide.</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Precision — scène unique pinnée, étapes synchronisées -->
+      <section id="precision" class="section section-precision c-precision">
+        <div class="container">
+          <div class="precision-stage c-precision__stage" aria-live="polite">
+            <div class="row g-4 g-lg-5 align-items-center precision-stage__row">
+              <div class="col-lg-5">
+                <div class="precision-visual c-precision__visual">
+                  <div class="precision-frame">
+                    <div class="precision-glow c-precision__glow" aria-hidden="true"></div>
+                    <p class="precision-label">Qualité d’intégration</p>
+                    <p class="precision-metric c-precision__metric" data-metric>96</p>
+                    <p class="precision-metric-label c-precision__metric-label" data-metric-label>
+                      Score perf. cible
+                    </p>
+                    <div class="precision-progress" aria-hidden="true">
+                      <span class="precision-progress-bar c-precision__bar" data-bar></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-7">
+                <div class="precision-copy">
+                  <div class="precision-panels c-precision__panels">
+                    <article class="precision-panel is-active" data-step="0">
+                      <p class="eyebrow">Précision · 01</p>
+                      <h2>Structure &amp; sémantique</h2>
+                      <p>
+                        HTML clair, hiérarchie lisible, accessibilité de base. Le
+                        socle avant toute animation.
+                      </p>
+                    </article>
+                    <article class="precision-panel" data-step="1">
+                      <p class="eyebrow">Précision · 02</p>
+                      <h2>Responsive &amp; grille</h2>
+                      <p>
+                        Bootstrap 5, breakpoints cohérents, composants stables sur
+                        mobile comme sur grand écran.
+                      </p>
+                    </article>
+                    <article class="precision-panel" data-step="2">
+                      <p class="eyebrow">Précision · 03</p>
+                      <h2>Motion &amp; livraison</h2>
+                      <p>
+                        ScrollTrigger calibré, reduced-motion respecté, handoff
+                        propre pour la suite du projet.
+                      </p>
+                    </article>
+                  </div>
+                  <ol class="precision-steps" aria-label="Étapes de précision">
+                    <li class="precision-step is-active" data-step-dot="0">
+                      <span>01</span> Structure
+                    </li>
+                    <li class="precision-step" data-step-dot="1">
+                      <span>02</span> Responsive
+                    </li>
+                    <li class="precision-step" data-step-dot="2">
+                      <span>03</span> Motion
+                    </li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Offres accordion Bootstrap -->
+      <section id="offres" class="section section-offers">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Offres</p>
+            <h2>Des formats adaptés à vos besoins</h2>
+          </div>
+          <div class="accordion offers-accordion" id="offersAccordion">
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#offer1" aria-expanded="true" aria-controls="offer1">
+                  Landing & site vitrine
+                </button>
+              </h3>
+              <div id="offer1" class="accordion-collapse collapse show" data-bs-parent="#offersAccordion">
+                <div class="accordion-body">
+                  Intégration one-page ou multipages : hero, sections métier,
+                  formulaires, SEO technique de base.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#offer2" aria-expanded="false" aria-controls="offer2">
+                  Refonte Front-end
+                </button>
+              </h3>
+              <div id="offer2" class="accordion-collapse collapse" data-bs-parent="#offersAccordion">
+                <div class="accordion-body">
+                  Modernisation d’une interface existante : responsive, accessibilité,
+                  performance et cohérence visuelle.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#offer3" aria-expanded="false" aria-controls="offer3">
+                  Motion & ScrollTrigger
+                </button>
+              </h3>
+              <div id="offer3" class="accordion-collapse collapse" data-bs-parent="#offersAccordion">
+                <div class="accordion-body">
+                  Ajout d’animations scrub / pin / reveals, calibrées desktop et
+                  allégées sur mobile.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Process -->
       <section id="process" class="section section-process c-process">
         <div class="container">
           <div class="section-heading">
             <p class="eyebrow">Process</p>
-            <h2>Une collab claire, de la maquette à la livraison</h2>
+            <h2>De la maquette à la mise en ligne</h2>
           </div>
           <div class="process-track c-process__track">
             <div class="process-line" aria-hidden="true">
@@ -176,57 +382,76 @@
             <ol class="process-steps list-unstyled">
               <li class="process-step c-process__step">
                 <span class="process-dot"></span>
-                <h3>Brief & maquette</h3>
-                <p>Lecture Figma, contraintes techniques, priorités responsive.</p>
+                <h3>Brief</h3>
+                <p>Contraintes, priorités responsive, assets.</p>
               </li>
               <li class="process-step c-process__step">
                 <span class="process-dot"></span>
                 <h3>Intégration</h3>
-                <p>HTML/CSS/JS, Bootstrap 5, composants réutilisables.</p>
+                <p>HTML/CSS/JS, Bootstrap 5, composants.</p>
               </li>
               <li class="process-step c-process__step">
                 <span class="process-dot"></span>
                 <h3>Motion</h3>
-                <p>GSAP / ScrollTrigger : timing, scrub, pin si pertinent.</p>
+                <p>GSAP / ScrollTrigger si le récit le demande.</p>
               </li>
               <li class="process-step c-process__step">
                 <span class="process-dot"></span>
                 <h3>Livraison</h3>
-                <p>QA multi-devices, perf, handoff propre et documenté.</p>
+                <p>QA multi-devices, perf, handoff propre.</p>
               </li>
             </ol>
           </div>
         </div>
       </section>
 
-      <!-- 5. Contact -->
+      <!-- Proof banner -->
+      <section class="section section-proof" aria-label="Stack technique">
+        <div class="container">
+          <div class="proof-banner">
+            <p class="proof-title">Démo d’intégration Front-end</p>
+            <p class="proof-stack">HTML5 · CSS3 · Bootstrap 5 · JavaScript · GSAP ScrollTrigger</p>
+            <p class="proof-links mb-0">
+              <a href="https://atelier-nord-demo-green.vercel.app" target="_blank" rel="noopener noreferrer">Live</a>
+              ·
+              <a href="https://github.com/Mitrakas51/atelier-nord-demo" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
       <section id="contact" class="section section-contact c-contact">
         <div class="container">
           <div class="contact-panel c-contact__panel reveal-contact">
             <div class="row g-4 align-items-end">
-              <div class="col-lg-6">
+              <div class="col-lg-5">
                 <p class="eyebrow">Contact</p>
-                <h2>Une intégration à lancer ?</h2>
+                <h2>Un projet d’intégration ?</h2>
                 <p class="section-lead mb-0">
-                  Démo réalisée pour illustrer une intégration Front-end avec
-                  Bootstrap 5 et GSAP ScrollTrigger.
+                  Parlons de votre maquette, des délais et du niveau de motion
+                  souhaité. Formulaire démo (non branché).
                 </p>
               </div>
-              <div class="col-lg-6">
-                <form class="contact-form" action="#" method="post" onsubmit="return false;">
-                  <div class="mb-3">
-                    <label class="form-label" for="name">Nom</label>
-                    <input class="form-control" id="name" name="name" type="text" placeholder="Votre nom" />
+              <div class="col-lg-7">
+                <form class="contact-form" action="#" method="post">
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label" for="name">Nom</label>
+                      <input class="form-control" id="name" name="name" type="text" autocomplete="name" placeholder="Votre nom" />
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label" for="email">Email</label>
+                      <input class="form-control" id="email" name="email" type="email" autocomplete="email" placeholder="vous@entreprise.fr" />
+                    </div>
+                    <div class="col-12">
+                      <label class="form-label" for="message">Message</label>
+                      <textarea class="form-control" id="message" name="message" rows="3" placeholder="Contexte, délais, liens utiles…"></textarea>
+                    </div>
+                    <div class="col-12">
+                      <button class="btn btn-primary" type="submit">Envoyer (démo)</button>
+                    </div>
                   </div>
-                  <div class="mb-3">
-                    <label class="form-label" for="email">Email</label>
-                    <input class="form-control" id="email" name="email" type="email" placeholder="vous@agence.fr" />
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label" for="message">Message</label>
-                    <textarea class="form-control" id="message" name="message" rows="3" placeholder="Parlez-moi du projet…"></textarea>
-                  </div>
-                  <button class="btn btn-primary" type="submit">Envoyer (démo)</button>
                 </form>
               </div>
             </div>
@@ -237,10 +462,11 @@
 
     <footer class="site-footer">
       <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
-        <p class="mb-0">Sébastien Louis — Démo intégration GSAP / ScrollTrigger</p>
-        <p class="mb-0">
-          <a href="https://github.com/sebachien" target="_blank" rel="noopener noreferrer">GitHub</a>
-          · Bootstrap 5 · JS vanilla · sans Three.js (hors scope)
+        <p class="mb-0">© Atelier Nord — Sébastien Louis</p>
+        <p class="mb-0 footer-meta">
+          <a href="https://github.com/Mitrakas51/atelier-nord-demo" target="_blank" rel="noopener noreferrer">Code source</a>
+          <span aria-hidden="true"> · </span>
+          HTML/CSS/JS · Bootstrap 5 · GSAP
         </p>
       </div>
     </footer>
@@ -250,8 +476,16 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+      integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"
+      integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d"
+      crossorigin="anonymous"
+    ></script>
     <script type="module" src="js/main.js"></script>
   </body>
 </html>

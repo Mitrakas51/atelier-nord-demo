@@ -1,7 +1,7 @@
 import { ensureGsapPlugins, prefersReducedMotion } from "./motion-utils.js";
 
 /**
- * Contact panel reveal. Keeps form demo-safe (no real submit).
+ * Contact — reveal panneau + preventDefault sur le formulaire démo.
  * @param {ParentNode} [root=document]
  * @returns {() => void}
  */

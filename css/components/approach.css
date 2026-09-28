@@ -1,0 +1,37 @@
+/* Approach — cards fade-up (peer: Bootstrap grid optional) */
+.section-approche {
+  padding-top: 3.5rem;
+}
+
+.approach-item {
+  height: 100%;
+  padding: 1.75rem;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(16, 24, 32, 0.06);
+  box-shadow: var(--shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.approach-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 50px rgba(16, 24, 32, 0.16);
+}
+
+.approach-index {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.approach-item h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.7rem;
+}
+
+.approach-item p {
+  margin: 0;
+  color: var(--muted);
+}

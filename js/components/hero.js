@@ -1,7 +1,7 @@
 import { ensureGsapPlugins, prefersReducedMotion } from "./motion-utils.js";
 
 /**
- * Hero intro + atmosphere scrub.
+ * Hero — intro staggered + léger scrub sur la photo de fond.
  * @param {ParentNode} [root=document]
  * @returns {() => void} cleanup
  */
@@ -14,16 +14,29 @@ export function initHero(root = document) {
 
   const ctx = gsap.context(() => {
     gsap.from(hero.querySelectorAll(".reveal-load"), {
-      y: 36,
+      y: 42,
       opacity: 0,
-      duration: 0.9,
-      stagger: 0.12,
+      duration: 1,
+      stagger: 0.14,
       ease: "power3.out",
-      delay: 0.1,
+      delay: 0.08,
     });
 
+    const photo = hero.querySelector(".hero-photo");
     const atmosphere = hero.querySelector(".hero-atmosphere, .c-hero__atmosphere");
-    if (atmosphere) {
+    if (photo) {
+      gsap.to(photo, {
+        yPercent: 12,
+        scale: 1.12,
+        ease: "none",
+        scrollTrigger: {
+          trigger: hero,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    } else if (atmosphere) {
       gsap.to(atmosphere, {
         scale: 1.08,
         ease: "none",

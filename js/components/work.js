@@ -1,19 +1,18 @@
 import { ensureGsapPlugins, prefersReducedMotion } from "./motion-utils.js";
 
 /**
- * Approach cards — chaque carte se révèle à son entrée viewport
- * (évite le stagger section qui anime hors écran les suivantes).
+ * Work cards — reveal individuel au scroll (chaque carte / image).
  * @param {ParentNode} [root=document]
  * @returns {() => void}
  */
-export function initApproach(root = document) {
+export function initWork(root = document) {
   ensureGsapPlugins();
-  const section = root.querySelector(".c-approach, .section-approche");
+  const section = root.querySelector(".c-work, .section-work");
   if (!section) return () => {};
   if (prefersReducedMotion()) return () => {};
 
   const cards = gsap.utils.toArray(
-    section.querySelectorAll(".reveal-card, .c-approach__card")
+    section.querySelectorAll(".reveal-work, .work-card")
   );
   if (cards.length === 0) return () => {};
 
@@ -21,13 +20,12 @@ export function initApproach(root = document) {
     cards.forEach((card) => {
       gsap.fromTo(
         card,
-        { y: 48, opacity: 0 },
+        { y: 44, opacity: 0 },
         {
           y: 0,
           opacity: 1,
           duration: 0.7,
           ease: "power2.out",
-          // clearProps : laisse le hover CSS (translateY) reprendre la main
           clearProps: "transform",
           scrollTrigger: {
             trigger: card,
